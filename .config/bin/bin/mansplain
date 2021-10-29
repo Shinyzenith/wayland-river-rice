@@ -1,0 +1,10 @@
+#!/bin/sh
+
+CHOICE=$(find /usr/share/man/man1 -type f | awk -F '/' '/1/ {print $6}' | sed 's/.1.gz//g' | sed 's/\.gz//g' | awk '!seen[$0]++'| tofi)
+
+if man "$CHOICE" > /dev/null 2>&1
+then
+	man -Tpdf $CHOICE | zathura - &
+else
+    echo "Missing man page: $CHOICE" >&2
+fi

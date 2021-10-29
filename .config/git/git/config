@@ -1,0 +1,38 @@
+[user]
+	email = aakashsensharma@gmail.com
+	name = Shinyzenith
+	signingkey = aakashsensharma@gmail.com
+
+[commit]
+	gpgsign = true
+
+[format]
+	signOff = true
+
+[tag]
+	pgpSign = true
+
+[credential]
+	helper = cache --timeout=36000
+
+[init]
+	defaultBranch = master
+
+[color]
+	ui = auto
+
+[core]
+	editor = nvim
+
+[sendemail]
+	smtpServer = smtp.gmail.com
+	smtpServerPort = 587
+	smtpEncryption = tls
+	smtpUser = aakashsensharma@gmail.com
+	annotate = yes
+
+[credential]
+	helper = store
+
+[push]
+	autoSetupRemote = true

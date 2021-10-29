@@ -1,0 +1,134 @@
+alias aurcomments='paru -Gc'
+alias grub-install='grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB'
+alias aurupdates='paru -Qua'
+alias c='tput reset'
+alias cat='bat'
+alias cd..='z ..'
+alias cd='z'
+alias cleanup='doas pacman -Rns $(pacman -Qtdq); paru -c' #Cleanup orphaned packages
+alias clear='tput reset'
+alias cp='cpg -gi'
+alias cpu="ps axch -o cmd:15,%cpu --sort=-%cpu | head"
+alias decrypt="gpg --no-symkey-cache"
+alias df='duf'
+alias e='exit'
+alias egrep='egrep --color=auto'
+alias encrypt="gpg -c --no-symkey-cache --cipher-algo AES256"
+alias fgrep='fgrep --color=auto'
+alias g='gotop'
+alias getpath="find -type f | fzf --preview 'bat --color=always --style=numbers --line-range=:500 {}'| sed 's/^..//g' | wl-copy -n"
+alias gpgexportprivkey="gpg --export-secret-keys --armor"
+alias gpgimportkey="gpg --import"
+alias gpglistkeys="gpg --list-keys --keyid-format LONG"
+alias grep='grep --color=auto'
+alias grub-mkconfig="doas grub-mkconfig -o /boot/grub/grub.cfg"
+alias hst="history 1 -1 | cut -c 8- | sort | uniq | fzf  --tiebreak=begin | tr -d '\n' | wl-copy"
+alias i="zi"
+alias killp='killprocess'
+alias kp='killprocess'
+alias l='exa -lahF --color=always --icons --sort=name --group-directories-first'
+alias less='bat'
+alias listfonts='fc-list'
+alias ls='exa -lhF --color=always --icons --sort=name --group-directories-first'
+alias lst='exa -lahFT --color=always --icons --sort=name --group-directories-first'
+alias m='mocp'
+alias mem="ps axch -o cmd:15,%mem --sort=-%mem | head"
+alias mirror="doas reflector -f 30 -l 30 --number 10 --verbose --save /etc/pacman.d/mirrorlist-arch;rankmirrors /etc/pacman.d/mirrorlist| doas tee /etc/pacman.d/mirrorlist" 
+alias mirrora="doas reflector --latest 30 --number 10 --sort age --save /etc/pacman.d/mirrorlist-arch;rankmirrors /etc/pacman.d/mirrorlist| doas tee /etc/pacman.d/mirrorlist"
+alias mirrord="doas reflector --latest 30 --number 10 --sort delay --save /etc/pacman.d/mirrorlist-arch;rankmirrors /etc/pacman.d/mirrorlist| doas tee /etc/pacman.d/mirrorlist"
+alias mirrors="doas reflector --latest 30 --number 10 --sort score --save /etc/pacman.d/mirrorlist-arch;rankmirrors /etc/pacman.d/mirrorlist| doas tee /etc/pacman.d/mirrorlist"
+alias mocp='mocp -M ~/.config/moc'
+alias mv='mvg -gi'
+alias nopadding="sed -i 's/^pad\(.*\)/# pad\1/g' ~/.config/foot/foot.ini"
+alias padding="sed -i 's/^# pad\(.*\)/pad\1/g' ~/.config/foot/foot.ini"
+alias paste='cat "$(find . -type f | fzf  --preview "bat --color=always --style=numbers --line-range=:500 {}")" | curl -sF "sprunge=<-" http://sprunge.us|wl-copy && wl-paste'
+alias pdw="pwd"
+alias pkgbuild='paru -Gp'
+alias q='exit'
+alias randomwallpaper='~/.config/river/wallpaper.sh >/dev/null 2>&1'
+alias rg="rg --sort path --no-ignore --hidden" #search content with ripgrep
+alias rip="pacman -Qe| cut -d' ' -f1 | bat" #Recent Installed Packages
+alias ripaur="pacman -Qm |cut -d ' ' -f 1| bat" #Recent Installed Packages
+alias riplong="expac --timefmt='%Y-%m-%d %T' '%l\t%n %v' | sort | tail -3000 | nl"
+alias rm='rm -i'
+alias sudoedit='doasedit'
+alias udpate='update'
+alias upate='update'
+alias update-grub="doas grub-mkconfig -o /boot/grub/grub.cfg"
+alias update='paru -Syyu --devel;paru -c'
+alias updatefonts='doas fc-cache -fv'
+alias updqte='update'
+alias updte='update'
+alias vim='nvim'
+alias webcam='setsid -f mpv --profile=low-latency --no-cache --untimed $(/bin/ls /dev/video* | fzf )'
+alias wget="wget -c" # continue the download
+alias yt="yt --detach"
+
+# required functions
+
+ex ()
+{
+  if [ -f $1 ] ; then
+    case $1 in
+      *.tar.bz2)   tar xjf $1   ;;
+      *.tar.gz)    tar xzf $1   ;;
+      *.bz2)       bunzip2 $1   ;;
+      *.rar)       unrar x $1   ;;
+      *.gz)        gunzip $1    ;;
+      *.tar)       tar xf $1    ;;
+      *.tbz2)      tar xjf $1   ;;
+      *.tgz)       tar xzf $1   ;;
+      *.zip)       unzip $1     ;;
+      *.Z)         uncompress $1;;
+      *.7z)        7z x $1      ;;
+      *.deb)       ar x $1      ;;
+      *.tar.xz)    tar xf $1    ;;
+      *.tar.zst)   tar xf $1    ;;
+      *)           echo "'$1' cannot be extracted via ex()" ;;
+    esac
+  else
+    echo "'$1' is not a valid file"
+  fi
+}
+
+rangercd () {
+    tmp="$(mktemp)"
+    ranger --choosedir="$tmp" "$@"
+    if [ -f "$tmp" ]; then
+        dir="$(cat "$tmp")"
+        rm -f "$tmp"
+        if [ -d "$dir" ]; then
+            if [ "$dir" != "$(pwd)" ]; then
+                cd "$dir"
+            fi
+        fi
+    fi
+}
+
+tomp4 () {
+	filename="$(echo $1| sed 's/\.[^.]*$//').mp4"
+	ffmpeg -i $1 $filename
+}
+
+openxwaylandappasroot(){
+	if ! command -v xhost >/dev/null; then
+		echo "xhost is not installed"
+	else
+		xhost si:localuser:root
+	fi
+}
+
+fcd() {
+	cd "$(find -maxdepth 3 -type d | fzf )"
+}
+
+open() {
+	setsid -f xdg-open "$(find -type f | fzf  --preview 'bat --color=always --style=numbers --line-range=:500 {}')"
+}
+
+upload() {
+	curl -sF"file=@$1" 0x0.st |wl-copy && notify-send "0x0.st" "File Uploaded\!"
+}
+
+bindkey -s '^o' '^urangercd\n'
+bindkey -s '^l' '^uc\n'

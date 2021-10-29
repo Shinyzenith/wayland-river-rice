@@ -1,0 +1,4 @@
+{
+  "rs": ["cargo build --release"],
+  "zig": ["zig test .", "zig build"]
+}

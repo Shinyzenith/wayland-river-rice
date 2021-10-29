@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+hex=$(wayshot -s "$(slurp -p)" --stdout | convert - -format '%[pixel:p{0,0}]' txt:-|grep -E "#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})" -o)
+
+convert -size 50x50 xc:$hex /tmp/pixelcolor.png
+notify-send "$hex" --icon="/tmp/pixelcolor.png" -t 2000 -a "Pixel Color"
+echo $hex | wl-copy -n

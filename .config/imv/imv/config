@@ -1,0 +1,7 @@
+[binds]
+n = n
+p = p
+w = exec ~/.config/bin/imv_wallpaper
+m = exec ~/.config/bin/imv_wall_move
+v = flip vertical
+<Shift+V> = flip horizontal

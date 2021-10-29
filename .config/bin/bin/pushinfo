@@ -1,0 +1,13 @@
+#!/bin/env bash
+set -e
+BRANCH=$1
+if [ -z "$BRANCH" ]
+then
+    BRANCH="master"
+fi
+
+URL=$(git remote get-url --push origin)
+REF=$(git reflog -2 origin/$BRANCH --pretty=format:%h | xargs printf '%s\n' | tac | sed '0,/$/ s/$/../' | xargs printf '%s')
+
+echo "To $URL"
+echo "    $REF  $BRANCH -> $BRANCH"

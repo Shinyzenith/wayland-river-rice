@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+choice=$(printf "Shutdown\nReboot\nSuspend" | tofi)
+if [[ $choice == "Shutdown" ]];then
+	loginctl poweroff
+elif [[ $choice == "Reboot" ]];then
+	loginctl reboot
+elif [[ $choice == "Suspend" ]];then
+	loginctl suspend
+fi

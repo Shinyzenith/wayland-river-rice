@@ -1,0 +1,90 @@
+alt + return
+	#foot -c ~/.config/foot/foot_nopadding.ini
+	alacritty --config-file ~/.config/alacritty/alacritty_no_padding.yml
+
+alt + c
+	alacritty -e sh -c "cd ~/.config/.dotfiles/.config; nvim -c ':Telescope find_files'"
+
+super + return
+	alacritty
+
+super + shift + f
+	pcmanfm
+
+super + w 
+	chromium
+
+super + shift + w
+	chromium --incognito
+
+super + v
+	alacritty -e pulsemixer
+
+super + d
+	$(tofi-run)
+
+super + Shift + b
+	alacritty -e btop
+
+super + b
+	killall -SIGUSR1 waybar
+
+super + m
+	alacritty -e mocp -M ~/.config/moc
+
+super + x
+	~/.config/bin/logout
+
+super + shift + r 
+	~/.config/river/init
+
+super + shift + d
+	discord-canary --ignore-gpu-blocklist --ozone-platform=wayland --enable-features=UseOzonePlatform --enable-features=VaapiVideoDecoder --no-sandbox --use-gl=desktop --enable-gpu-rasterization --enable-zero-copy
+
+super + o
+	~/.config/bin/killprocess
+
+super + i
+	wayout --toggle eDP-1
+
+control + m
+	~/.config/bin/mansplain
+
+print
+	bash $HOME/.config/bin/screenshot area
+
+super + print
+	bash $HOME/.config/bin/screenshot full
+
+super + shift + print
+	bash $HOME/.config/bin/swappyshot area
+
+super + BackSpace
+	wl-copy -c
+
+super + c
+	bash ~/.config/bin/pixelcolor
+
+XF86AudioRaiseVolume
+	pamixer -i 5
+
+XF86AudioLowerVolume
+	pamixer -d 5
+
+XF86AudioMute
+	pamixer -t
+
+XF86AudioMedia
+	playerctl play-pause
+
+pause
+	playerctl play-pause
+
+XF86AudioPlay
+	playerctl play-pause
+
+XF86AudioPrev
+	playerctl previous
+
+XF86AudioNext
+	playerctl next

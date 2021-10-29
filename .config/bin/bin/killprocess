@@ -1,0 +1,7 @@
+#!/bin/sh
+choice=$(ps axch -o cmd| tofi)
+if [[ ! $choice ]];then
+	echo "Choose a program to kill"; exit 1
+else
+	ps aux | grep -i $(echo $choice| sed 's/ <defunct>//') | awk '{print $2}'| xargs pkexec kill -9
+fi

@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+rm -rf /tmp/wallhaven
+mkdir -p /tmp/wallhaven
+cd /tmp/wallhaven
+urls=$(curl -s "https://wallhaven.cc/search?categories=010&purity=000&atleast=1920x1080&sorting=random&order=desc"| grep -Eo "https:\/\/th.wallhaven.cc\/small\/\w{2}\/\w*\..{3}")
+notify-send "Wallpaper Script" "Downloading the images."
+for url in $(echo $urls);do
+	wget $(echo $url | sed 's/https:\/\/th\.wallhaven\.cc\/small\(\/.*\)/\1/g' | sed 's/^\(\/.*\/\)\(.*\)/https:\/\/w.wallhaven.cc\/full\1wallhaven-\2/g') &
+done
+wait
+setsid -f imv-folder .

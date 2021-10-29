@@ -1,0 +1,10 @@
+*zcompdump*
+__pycache__
+accounts.conf
+credentials
+last_directory
+pid
+playlist.m3u
+plugins
+zsh_history
+btop.log

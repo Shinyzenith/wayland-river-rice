@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+killall swaybg; setsid -f swaybg -i $imv_current_file
